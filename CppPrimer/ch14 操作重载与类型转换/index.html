@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>ch14 操作重载与类型转换 - C/C++ Study Note</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-XXXXXXXX-X', 'auto');
+            ga('send', 'pageview');
+        </script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">C/C++ Study Note</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Introduction</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Game Server <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../GameServer/GameServer/">Chapters</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">C++ Primer <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">Chapters</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../ch01 开始/">ch01 开始</a>
+</li>
+            
+<li >
+    <a href="../ch02 变量和基本类型/">ch02 变量和基本类型</a>
+</li>
+            
+<li >
+    <a href="../ch03 字符串、向量和数组/">ch03 字符串、向量和数组</a>
+</li>
+            
+<li >
+    <a href="../ch04 表达式/">ch04 表达式</a>
+</li>
+            
+<li >
+    <a href="../ch05 语句/">ch05 语句</a>
+</li>
+            
+<li >
+    <a href="../ch06 函数/">ch06 函数</a>
+</li>
+            
+<li >
+    <a href="../ch07 类/">ch07 类</a>
+</li>
+            
+<li >
+    <a href="../ch08 IO库/">ch08 IO库</a>
+</li>
+            
+<li >
+    <a href="../ch09 顺序容器/">ch09 顺序容器</a>
+</li>
+            
+<li >
+    <a href="../ch10 泛型算法/">ch10 泛型算法</a>
+</li>
+            
+<li >
+    <a href="../ch11 关联容器/">ch11 关联容器</a>
+</li>
+            
+<li >
+    <a href="../ch12 动态内存/">ch12 动态内存</a>
+</li>
+            
+<li >
+    <a href="../ch13 拷贝控制/">ch13 拷贝控制</a>
+</li>
+            
+<li class="active">
+    <a href="./">ch14 操作重载与类型转换</a>
+</li>
+            
+<li >
+    <a href="../ch15 面向对象程序设计/">ch15 面向对象程序设计</a>
+</li>
+            
+<li >
+    <a href="../ch16 模板与泛型编程/">ch16 模板与泛型编程</a>
+</li>
+            
+<li >
+    <a href="../ch17 标准库特殊设施/">ch17 标准库特殊设施</a>
+</li>
+            
+<li >
+    <a href="../ch18 用于大型程序的工具/">ch18 用于大型程序的工具</a>
+</li>
+            
+<li >
+    <a href="../ch19 特殊工具与技术/">ch19 特殊工具与技术</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#">CheatSheet</a>
+    <ul class="dropdown-menu">
+            
+<li >
+    <a href="../cheatsheet/auto可能的适用场景/">auto可能的适用场景</a>
+</li>
+            
+<li >
+    <a href="../cheatsheet/static的3个用途/">static的3个用途</a>
+</li>
+            
+<li >
+    <a href="../cheatsheet/若干种typedef/">若干种typedef</a>
+</li>
+            
+<li >
+    <a href="../cheatsheet/类内初始值/">类内初始值</a>
+</li>
+            
+<li >
+    <a href="../cheatsheet/运算符重载/">运算符重载</a>
+</li>
+            
+<li >
+    <a href="../cheatsheet/向set中插入自定义类型对象/">向set中插入自定义类型对象</a>
+</li>
+    </ul>
+  </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../ch13 拷贝控制/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../ch15 面向对象程序设计/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/lzlssg/Study-Summary/tree/master/notes/CppPrimer/ch14 操作重载与类型转换.md"><i class="fa fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#_1">第十四章 操作重载与类型转换</a></li>
+            <li><a href="#_2">基本概念</a></li>
+            <li><a href="#_3">输入和输出运算符</a></li>
+            <li><a href="#_6">算术和关系运算符</a></li>
+            <li><a href="#_8">赋值运算符</a></li>
+            <li><a href="#_9">下标运算符</a></li>
+            <li><a href="#_10">递增和递减运算符</a></li>
+            <li><a href="#_11">成员访问运算符</a></li>
+            <li><a href="#_12">函数调用运算符</a></li>
+            <li><a href="#_14">重载、类型转换与运算符</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="_1">第十四章 操作重载与类型转换</h1>
+<hr />
+<h2 id="_2">基本概念</h2>
+<p>重载的运算符是具有特殊名字的函数：它们的名字由关键字operator和其后要定义的运算符号共同组成。和其他函数一样，重载的运算符也包含返回类型、参数列表以及函数体。</p>
+<p>重载运算符函数的参数数量与该运算符作用的运算对象数量一样多。一元运算符有一个参数，二元运算符有两个。对于二元运算符来说，左侧运算对象传递给第一个参数，右侧运算对象传递给第二个参数。</p>
+<p>如果一个运算符函数是成员函数，则它的第一个（左侧）运算对象绑定到隐式的this指针上，因此，成员运算符函数的参数数量比运算符的运算对象总数少一个。</p>
+<p>p491列出了可以重载的运算符。</p>
+<p><strong>直接调用一个重载的运算符函数</strong></p>
+<p>我们能像调用普通函数一样直接调用运算符函数：</p>
+<pre><code class="c++">data1 + data2;              // 普通的表达式
+operator+(data1, data2);    // 等价的函数调用
+
+data1 += data2;             // 基于“调用”的表达式
+data1.operator+=(data2);    // 对成员运算符函数的等价调用
+</code></pre>
+
+<p><strong>某些运算符不应该被重载</strong></p>
+<ul>
+<li>
+<p>逻辑与、逻辑或运算符，这些运算符指定了运算对象的求值顺序，又因为使用重载的函数运算符本质上是一次函数调用，那么求值顺序的规则无法得到应用。</p>
+</li>
+<li>
+<p>取地址运算符，逗号运算符，C++语言已定义了其特殊含义，不应该被重载，否则其行为将异于常态。</p>
+</li>
+</ul>
+<p>p492讨论了如何选择重载运算符。</p>
+<p><strong>选择作为成员或者非成员</strong></p>
+<p>下面的准则有助于选择将运算符定义为成员函数还是普通的非成员函数：</p>
+<ul>
+<li>
+<p>赋值（=）、下标（[]）、调用（()）、成员访问箭头（-&gt;），必须是成员。</p>
+</li>
+<li>
+<p>复合赋值运算符一般来说应该是成员，但并非必须。</p>
+</li>
+<li>
+<p>改变对象状态的运算符或者与给定类型密切相关的运算符，如递增、递减和解引用运算符，通常应该是成员。</p>
+</li>
+<li>
+<p>具有对称性的运算符可能转换任意一端的运算对象，例如算术、相等性、关系和位运算等，通常应该是普通的非成员函数。</p>
+</li>
+</ul>
+<h2 id="_3">输入和输出运算符</h2>
+<p>IO标准库分别使用&gt;&gt;和&lt;&lt;执行输入和输出操作，IO库定义了用其读写内置类型的版本，而类则需要自定义适合其对象的新版本以支持IO操作。</p>
+<h3 id="_4">重载输出运算符&lt;&lt;</h3>
+<p>通常情况下，输出运算符的第一个形参是一个非常量ostream对象的引用。是非常量是因为向流写入内容会改变其状态；是引用是因为无法复制一个ostream对象。</p>
+<p>第二个形参一般来说是一个常量的引用，它是我们想打印的类类型。是引用是因为我们希望避免复制实参；是常量是因为打印对象不会改变对象的内容。</p>
+<p>为了与其他输出运算符保持一致，operator&lt;&lt;一般要返回它的ostream形参。</p>
+<pre><code class="c++">ostream &amp;operator&lt;&lt;(ostream &amp;os, const Sales_data &amp;item)
+{
+    os &lt;&lt; item.isbn() &lt;&lt; &quot; &quot; &lt;&lt; item.units_sold &lt;&lt; &quot; &quot;
+       &lt;&lt; item.revenue &lt;&lt; &quot; &quot; &lt;&lt; item.avg_price();
+
+    return os;
+}
+</code></pre>
+
+<p>!!!note
+    通常，输出运算符应该主要负责打印对象的内容而非控制格式，输出运算符不应该打印换行符。</p>
+<h3 id="_5">重载输入运算符&gt;&gt;</h3>
+<p>通常情况下，输入运算符的第一个形参是运算符将要读取的流的引用，第二个形参是将要读入到的（非常量）对象的引用，返回某个给定流的引用。第二个形参之所以必须是个非常量是因为输入运算符本身的目的就是将输入读入到这个对象中。</p>
+<pre><code class="c++">istream&amp; operator&gt;&gt;(istream &amp;is, Sales_data &amp;item)
+{
+    double price; // 不需要初始化，因为我们将先读入数据到price，之后才使用它
+    is &gt;&gt; item.bookNo &gt;&gt; item.units_sold &gt;&gt; price;
+    if (is)
+        item.revenue = item.units_sold * price;
+    else
+        item = Sales_data(); // 输入失败：对象被赋予默认状态
+
+    return is;
+}
+</code></pre>
+
+<p>!!!note
+    输入运算符必须处理输入可能失败的情况，而输出运算符不需要。</p>
+<h2 id="_6">算术和关系运算符</h2>
+<p>通常情况下，我们把算术运算符和关系运算符定义成非成员函数以允许对左侧或右侧的运算对象进行转换。因为这些运算符一般不需要改变运算对象的状态，所以形参都是常量的引用。</p>
+<p>如果类定义了算术运算符，则它一般也会定义一个对应的复合赋值运算符。此时，最有效的方式是使用复合赋值来定义算术运算符：</p>
+<pre><code class="c++">Sales_data
+operator+(const Sales_data &amp;lhs, const Sales_data &amp;rhs)
+{
+    Sales_data sum = lhs;       // 把lhs的数据成员拷贝给sum
+    sum += rhs;                 // 把rhs加到sum中
+    return sum;
+}
+</code></pre>
+
+<h3 id="_7">相等运算符</h3>
+<pre><code class="c++">bool operator==(const Sales_data &amp;lhs, const Sales_data &amp;rhs)
+{
+    return lhs.isbn() == rhs.isbn() &amp;&amp;
+           lhs.units_sold == rhs.units_sold &amp;&amp;
+           lhs.revenue == rhs.revenue;
+}
+
+bool operator!=(const Sales_data &amp;lhs, const Sales_data &amp;rhs)
+{
+    return !(lhs == rhs);
+}
+</code></pre>
+
+<h2 id="_8">赋值运算符</h2>
+<p>之前介绍了拷贝赋值和移动赋值运算符，它们可以把类的一个对象赋值给类的另一个对象。此外，类还可以定义其他赋值运算符以使用别的类型作为右侧运算对象。</p>
+<p>比如：</p>
+<pre><code class="c++">vector&lt;string&gt; v;
+v = {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};
+</code></pre>
+
+<pre><code class="c++">class StrVec {
+public:
+    StrVec&amp; operator=(std::initializer_list&lt;std::string&gt;)
+    {
+        // ...
+    }
+};
+</code></pre>
+
+<p><strong>复合赋值运算符</strong></p>
+<pre><code class="c++">// 作为成员的二元运算符：左侧运算对象绑定到隐式的this指针
+Sales_data&amp; Sales_data::operator+=(const Sales_data &amp;rhs)
+{
+    units_sold += rhs.units_sold;
+    revenue += rhs.revenue;
+    return *this;
+}
+</code></pre>
+
+<h2 id="_9">下标运算符</h2>
+<p>表示容器的类通常可以通过元素在容器中的位置访问元素，这些类一般会定义下标运算符operator[]。</p>
+<p>为了与下标的原始定义兼容，下标运算符通常以所访问元素的引用作为返回值，这样做的好处是下标可以出现在赋值运算符的任意一端。最好同时定义下标运算符的常量版本和非常量版本，当用作于一个常量对象时，下标运算符返回常量引用以确保我们不会给返回的对象赋值。</p>
+<pre><code class="c++">class StrVec {
+public:
+    std::string&amp; operator[](std::size_t n) { return elements[n]; }
+
+    const std::string&amp; operator[](std::size_t n) const { return elements[n]; }
+
+private:
+    std::string *elements;  // 指向数组首元素的指针
+};
+</code></pre>
+
+<h2 id="_10">递增和递减运算符</h2>
+<p>在迭代器类中通常会实现递增运算符++和递减运算符--，这两种运算符使得类可以在元素的序列中前后移动。</p>
+<p>对于内置类型来说，递增和递减运算符既有前置版本也有后置版本。同样，我们也应该为类定义两个版本的递增和递减运算符。</p>
+<pre><code class="c++">class StrBlobPtr {
+public:
+    StrBlobPtr&amp; operator++();       // 前置运算符
+    StrBlobPtr&amp; operator--();
+};
+</code></pre>
+
+<p><strong>区分前置和后置运算符</strong></p>
+<p>后置版本接受一个额外的（不被使用的）int类型的形参，这个形参的唯一作用就是区分前置版本和后置版本的函数，而不是真的要在实现后置版本时参与运算。</p>
+<pre><code class="c++">class StrBlobPtr {
+public:
+    StrBlobPtr operator++(int);     // 后置运算符
+    StrBlobPtr operator--(int);
+};
+</code></pre>
+
+<p>!!!note
+    为了与内置版本保持一致，后置运算符应该返回对象的原值，返回的形式是一个值而非引用。</p>
+<h2 id="_11">成员访问运算符</h2>
+<p>在迭代器类及智能指针类中常常用到解引用运算符和箭头运算符。</p>
+<pre><code class="c++">class StrBlobPtr {
+public:
+    std::string&amp; operator*() const;
+    std::string* operator-&gt;() const
+    {
+        // 将实际工作委托给解引用运算符
+        return &amp; this-&gt;operator*();
+    }
+};
+</code></pre>
+
+<h2 id="_12">函数调用运算符</h2>
+<p>如果类重载了函数调用运算符，则我们可以像使用函数一样使用该类的对象。因为这样的类同时也能存储状态，所以与普通函数相比它们更灵活。</p>
+<pre><code class="c++">struct absInt {
+    int operator()(int val) const {
+        return val &lt; 0 ? -val : val;
+    }
+};
+</code></pre>
+
+<p>这个类只定义了一种操作：函数调用运算符，它负责接受一个int类型的实参，然后返回该实参的绝对值。</p>
+<p>使用调用运算符的方式是令一个absInt对象作用于一个实参列表，这一过程看起来非常像调用函数的过程：</p>
+<pre><code class="c++">int i = -42;
+absInt absObj;
+int ui = absObj(i);     // 将i传递给absObj.operator()
+</code></pre>
+
+<p>函数调用运算符必须是成员函数。一个类可以定义多个不同版本的调用运算符，相互之间应该在参数数量或类型上有所区别。</p>
+<p>如果类定义了调用运算符，则该类的对象称作函数对象（function object）。因为可以调用这种对象，所以我们说这些对象的行为像函数一样。</p>
+<h3 id="lambda">lambda是函数对象</h3>
+<p>当我们编写了一个lambda后，编译器将该表达式翻译成一个未命名类的未命名对象。在lambda表达式产生的类中含有一个重载的函数调用运算符，默认情况下，它是一个const成员函数。</p>
+<p>当一个lambda表达式通过引用捕获变量时，将由程序负责确保lambda执行时引用所引用的对象确实存在。因此，编译器可以直接使用该引用而无须在lambda产生的类中将其存储为数据成员。</p>
+<p>通过值捕获的变量被拷贝到lambda中。因此，这种lambda产生的类必须为每个值捕获的变量建立对应的数据成员，同时创建构造函数，令其使用捕获的变量的值来初始化数据成员。</p>
+<h3 id="_13">标准库定义的函数对象</h3>
+<p>标准库定义了一组表示算术运算符、关系运算符和逻辑运算符的类，每个类分别定义了一个执行命名操作的调用运算符。例如，plus类定义了一个函数调用运算符用于对一对运算对象执行+操作。</p>
+<p>这些类都被定义成模板的形式，我们可以为其指定具体的应用类型，这里的类型即调用运算符的形参类型。例如，<code>plus&lt;string&gt;</code>令string的加法运算符作用于string对象。</p>
+<pre><code class="c++">plus&lt;int&gt; intAdd;           // 可执行int加法的函数对象
+int sum = intAdd(10, 20);   // 使用intAdd::operator(int, int)求10和20的和
+</code></pre>
+
+<p>p510列出了所有这些函数对象类，它们定义在functional头文件中。</p>
+<p><strong>在算法中使用标准库函数对象</strong></p>
+<p>表示运算符的函数对象类常用来替换算法中的默认运算符。比如，默认情况下排序算法使用operator&lt;将序列按照升序排列。如果要执行降序排列的话，我们可以传入一个greater类型的对象。</p>
+<pre><code class="c++">// 传入一个临时的函数对象用于执行两个string对象的&gt;比较运算
+sort(svec.begin(), svec.end(), greater&lt;string&gt;());
+</code></pre>
+
+<h3 id="function">可调用对象与function</h3>
+<p>C++语言中有几种可调用的对象：函数、函数指针、lambda表达式、bind创建的对象以及重载了函数调用运算符的类。</p>
+<p>和其他对象一样，可调用对象也有类型。lambda有它自己唯一的未命名的类类型；函数及函数指针的类型由其返回值和实参类型决定。</p>
+<p>然而，两个不同类型的可调用对象却可能共享同一种调用形式（call signature）。调用形式指明了调用返回的类型以及传递给调用的实参类型。一种调用形式对应一个函数类型，例如：</p>
+<pre><code class="c++">int(int, int)
+</code></pre>
+
+<p>function是一个模板，当创建一个具体的function类型时我们必须提供额外的信息，此额外信息是指该function类型能够表示的对象的调用形式：</p>
+<pre><code class="c++">function&lt;int(int, int)&gt;
+</code></pre>
+
+<p>这里声明的function类型，表示接受两个int、返回一个int的可调用对象：</p>
+<pre><code class="c++">function&lt;int(int, int)&gt; f1 = add;           // 函数指针
+function&lt;int(int, int)&gt; f2 = divide();      // 函数对象类的对象
+function&lt;int(int, int)&gt; f3 = [](int i, int j) { return i * j; };    // lambda
+
+cout &lt;&lt; f1(4, 2) &lt;&lt; endl;
+cout &lt;&lt; f2(4, 2) &lt;&lt; endl;
+cout &lt;&lt; f3(4, 2) &lt;&lt; endl;
+</code></pre>
+
+<h2 id="_14">重载、类型转换与运算符</h2>
+<p>在263页中我们看到由一个实参调用的非显示构造函数定义了一种隐式的类型转换，这种构造函数将实参类型的对象转换成类类型。我们同样能定义对于类类型的类型转换，通过定义类型转换运算符可以做到这一点。</p>
+<p>转换构造函数和类型转换运算符共同定义了<strong>类类型转换（class-type conversions）</strong>。</p>
+<h3 id="_15">类型转换运算符</h3>
+<p><strong>类型转换运算符（conversion  operator）</strong>是类的一种特殊成员函数，它负责将一个类类型的值转换成其他类型。其一般形式如下：</p>
+<pre><code class="c++">operator type() const;
+</code></pre>
+
+<p>其中type表示某种类型。类型转换运算符可以面向任意类型（除了void之外）进行定义，只要该类型能作为函数的返回类型。</p>
+<p>类型转换运算符既没有显式的返回类型，也没有形参，而且必须定义成类的成员函数。类型转换运算符通常不应该改变待转换对象的内容，因此，一般被定义成const成员。</p>
+<p>举个例子，我们定义一个比较简单的类，令其表示0到255之间的一个整数：</p>
+<pre><code class="c++">class SmallInt {
+public:
+    SmallInt(int i = 0) : val(i)
+    {
+        if (i &lt; 0 || i &gt; 255)
+            throw std::out_of_range(&quot;Bad SmallInt value&quot;);
+    }
+
+    operator int() const { return val; }
+private:
+    std::size_t val;
+};
+</code></pre>
+
+<p>SmallInt类的构造函数将算数类型的值转换成SmallInt对象，而类型转换运算符将SmallInt对象转换成int：</p>
+<pre><code class="c++">SmallInt si;
+si = 4;         // 4 -&gt; SmallInt, 然后调用赋值运算符
+si + 3;         // si -&gt; int，然后执行整数的加法
+</code></pre>
+
+<p><strong>类型转换运算符可能产生意外结果</strong></p>
+<p>在实践中，类很少提供类型转换运算符。但有一种例外：对于类来说，定义向bool的类型转换还是比较普遍的现象，但这会遇到一个问题：因为bool是一种算术类型，所以类类型的对象转换成bool后就能被用在任何需要算术类型的上下文中（这不是期望的）。</p>
+<p><strong>显式的类型转换运算符</strong></p>
+<p>为了防止上述异常情况的发生，C++新标准引入了显式的类型转换运算符（explicit conversion operator）：</p>
+<pre><code class="c++">class SmallInt {
+public:
+    // 编译器不会自动执行这一类型转换
+    explicit operator int() const { return val; }
+};
+</code></pre>
+
+<p>编译器不会将一个显式的类型转换运算符用于隐式类型转换：</p>
+<pre><code class="c++">SmallInt si = 3;            // 正确：SmallInt的构造函数不是显式的
+si + 3;                     // 错误：此处需要隐式的类型转换，但类的运算符是显式的
+static_cast&lt;int&gt;(si) + 3;   // 正确：显式地请求类型转换
+</code></pre>
+
+<p>但，如果表达式被用作条件，则编译器会将显示的类型转换自动应用于它。</p>
+<p>!!!note
+    向bool的类型转换通常用在条件部分，因此operator bool一般定义成explicit的。</p>
+<p>14.9.2节和14.9.3节讨论了避免二义性的类型转换和函数匹配遇到重载运算符时可选函数的问题，详细见书本p517。</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>Copyright &copy; since 2019 Zhongliang lu</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
