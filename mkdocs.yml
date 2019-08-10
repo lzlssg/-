@@ -9,13 +9,14 @@ repo_url: https://github.com/lzlssg/Study-Summary
 edit_uri: "tree/master/notes"
 
 nav:
-  - Introduction: index.md
+  - 项目简介: index.md
   
   - Game Server: 
-      - Chapters: GameServer/GameServer.md
+      - 章节:
+        - 简介: GameServer/GameServer.md
   
   - C++ Primer:
-    - Chapters: 
+    - 章节: 
       - ch01 开始: CppPrimer/ch01 开始.md
       - ch02 变量和基本类型: CppPrimer/ch02 变量和基本类型.md
       - ch03 字符串、向量和数组: CppPrimer/ch03 字符串、向量和数组.md
@@ -35,13 +36,14 @@ nav:
       - ch17 标准库特殊设施: CppPrimer/ch17 标准库特殊设施.md
       - ch18 用于大型程序的工具: CppPrimer/ch18 用于大型程序的工具.md
       - ch19 特殊工具与技术: CppPrimer/ch19 特殊工具与技术.md
-    - CheatSheet:
+    - 备忘单:
       - auto可能的适用场景: CppPrimer/cheatsheet/auto可能的适用场景.md
       - static的3个用途: CppPrimer/cheatsheet/static的3个用途.md
       - 若干种typedef: CppPrimer/cheatsheet/若干种typedef.md
       - 类内初始值: CppPrimer/cheatsheet/类内初始值.md
       - 运算符重载: CppPrimer/cheatsheet/运算符重载.md
       - 向set中插入自定义类型对象: CppPrimer/cheatsheet/向set中插入自定义类型对象.md
+      - inline函数的优点和缺点: CppPrimer/cheatsheet/inline函数的优点和缺点.md
 
 extra:
   search:
