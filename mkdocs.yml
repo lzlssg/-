@@ -50,6 +50,20 @@ nav:
       - 向set中插入自定义类型对象: CppPrimer/cheatsheet/向set中插入自定义类型对象.md
       - inline函数的优点和缺点: CppPrimer/cheatsheet/inline函数的优点和缺点.md
 
+theme:
+  name: 'material'
+  logo:
+    icon: 'school'
+  palette:
+    primary: 'blue'
+    accent: 'blue'
+  font:
+    text: 'PT Sans'
+    code: 'PT Sans'
+  language: 'zh'
+  feature:
+    tabs: true
+
 extra:
   search:
     language: 'en, jp'
