@@ -59,7 +59,20 @@
                                 <a href="../../..">项目简介</a>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Game Server <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">GameServer <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../../GameServer/GameServer/">简介</a>
+</li>
+                                    
+<li >
+    <a href="../../../GameServer/DBServer/">数据服务器</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">CS <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     
   <li class="dropdown-submenu">
@@ -67,7 +80,11 @@
     <ul class="dropdown-menu">
             
 <li >
-    <a href="../../../GameServer/GameServer/">简介</a>
+    <a href="../../../ComputerSystems/ch01 计算机系统漫游/">ch01 计算机系统漫游</a>
+</li>
+            
+<li >
+    <a href="../../../ComputerSystems/ch02 信息的表示和处理/">ch02 信息的表示和处理</a>
 </li>
     </ul>
   </li>
@@ -233,13 +250,13 @@
 <h1 id="inline">inline函数的优点和缺点</h1>
 <hr />
 <h2 id="_1">优点</h2>
-<p><em>inline定义的内联函数，函数代码被放入符号表中，在使用时进行替换（像宏一样展开），效率很高。
-</em>类的内联函数也是函数。编绎器在调用一个内联函数，首先会检查参数问题，保证调用正确，像对待真正函数一样，消除了隐患及局限性。
-*inline可以作为类的成员函数，它可以使用所在类的保护成员及私有成员。</p>
+<p>inline定义的内联函数，函数代码被放入符号表中，在使用时进行替换（像宏一样展开），效率很高。
+类的内联函数也是函数。编绎器在调用一个内联函数，首先会检查参数问题，保证调用正确，像对待真正函数一样，消除了隐患及局限性。
+inline可以作为类的成员函数，它可以使用所在类的保护成员及私有成员。</p>
 <h2 id="_2">缺点</h2>
-<p><em>内联函数以复制为代价，活动产函数开销。
-</em>如果函数的代码较长，使用内联将消耗过多内存。
-*如果函数体内有循环，那么执行函数代码时间比调用开销大。</p></div>
+<p>内联函数以复制为代价，活动产函数开销。
+如果函数的代码较长，使用内联将消耗过多内存。
+如果函数体内有循环，那么执行函数代码时间比调用开销大。</p></div>
         </div>
 
         <footer class="col-md-12">
