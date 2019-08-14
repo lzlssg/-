@@ -11,9 +11,14 @@ edit_uri: "tree/master/notes"
 nav:
   - 项目简介: index.md
   
-  - Game Server: 
-      - 章节:
-        - 简介: GameServer/GameServer.md
+  - GameServer: 
+    - 简介: GameServer/GameServer.md
+    - 数据服务器: GameServer/DBServer.md
+
+  - CS:
+    - 章节:
+      - ch01 计算机系统漫游: ComputerSystems/ch01 计算机系统漫游.md
+      - ch02 信息的表示和处理: ComputerSystems/ch02 信息的表示和处理.md
   
   - C++ Primer:
     - 章节: 
