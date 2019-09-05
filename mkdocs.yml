@@ -19,6 +19,8 @@ nav:
     - 章节:
       - ch01 计算机系统漫游: ComputerSystems/ch01 计算机系统漫游.md
       - ch02 信息的表示和处理: ComputerSystems/ch02 信息的表示和处理.md
+      - ch03 程序的机器级表示: ComputerSystems/ch03 程序的机器级表示.md
+  
   
   - C++ Primer:
     - 章节: 
